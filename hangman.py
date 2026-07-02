@@ -5,71 +5,14 @@ WORDS = [
     "python", "computer", "hangman", "keyboard", "program",
     "developer", "variable", "function", "terminal", "internet"
 ]
-
 HANGMAN_PICS = [
-    """
-     +---+
-     |   |
-         |
-         |
-         |
-         |
-    =========
-    """,
-    """
-     +---+
-     |   |
-     O   |
-         |
-         |
-         |
-    =========
-    """,
-    """
-     +---+
-     |   |
-     O   |
-     |   |
-         |
-         |
-    =========
-    """,
-    """
-     +---+
-     |   |
-     O   |
-    /|   |
-         |
-         |
-    =========
-    """,
-    """
-     +---+
-     |   |
-     O   |
-    /|\\  |
-         |
-         |
-    =========
-    """,
-    """
-     +---+
-     |   |
-     O   |
-    /|\\  |
-    /    |
-         |
-    =========
-    """,
-    """
-     +---+
-     |   |
-     O   |
-    /|\\  |
-    / \\  |
-         |
-    =========
-    """
+    " +---+\n |   |\n     |\n     |\n     |\n     |\n=========",
+    " +---+\n |   |\n O   |\n     |\n     |\n     |\n=========",
+    " +---+\n |   |\n O   |\n |   |\n     |\n     |\n=========",
+    " +---+\n |   |\n O   |\n/|   |\n     |\n     |\n=========",
+    " +---+\n |   |\n O   |\n/|\  |\n     |\n     |\n=========",
+    " +---+\n |   |\n O   |\n/|\  |\n/    |\n     |\n=========",
+    " +---+\n |   |\n O   |\n/|\  |\n/ \  |\n     |\n========="
 ]
 
 def choose_word():
@@ -77,7 +20,6 @@ def choose_word():
 
 def display_word(secret_word, guessed_letters):
     shown_word = ""
-
     for letter in secret_word:
         if letter in guessed_letters:
             shown_word += letter + " "
@@ -157,4 +99,4 @@ def main():
             break
 main()
 
-
+# %%
