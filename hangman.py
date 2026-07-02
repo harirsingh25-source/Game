@@ -1,69 +1,69 @@
 # %%
-import random
+import random # Import the random module to choose a random word from the list of words
 
 WORDS = [
-    "python", "computer", "hangman", "keyboard", "program",
-    "developer", "variable", "function", "terminal", "internet"
+    "python", "computer", "hangman", "keyboard", "program", #   First five words
+    "developer", "variable", "function", "terminal", "internet" #   Last five words
 ]
 HANGMAN_PICS = [
-    " +---+\n |   |\n     |\n     |\n     |\n     |\n=========",
-    " +---+\n |   |\n O   |\n     |\n     |\n     |\n=========",
-    " +---+\n |   |\n O   |\n |   |\n     |\n     |\n=========",
-    " +---+\n |   |\n O   |\n/|   |\n     |\n     |\n=========",
-    " +---+\n |   |\n O   |\n/|\  |\n     |\n     |\n=========",
-    " +---+\n |   |\n O   |\n/|\  |\n/    |\n     |\n=========",
-    " +---+\n |   |\n O   |\n/|\  |\n/ \  |\n     |\n========="
+    " +---+\n |   |\n     |\n     |\n     |\n     |\n=========", #First element is the empty gallows 
+    " +---+\n |   |\n O   |\n     |\n     |\n     |\n=========", #Second element is the head
+    " +---+\n |   |\n O   |\n |   |\n     |\n     |\n=========", #Third element is the body
+    " +---+\n |   |\n O   |\n/|   |\n     |\n     |\n=========", #Fourth element is the left arm
+    " +---+\n |   |\n O   |\n/|\  |\n     |\n     |\n=========", #Fifth element is the right arm
+    " +---+\n |   |\n O   |\n/|\  |\n/    |\n     |\n=========", #Sixth element is the left leg
+    " +---+\n |   |\n O   |\n/|\  |\n/ \  |\n     |\n=========" #Seventh element is the right leg
 ]
 
-def choose_word():
-    return random.choice(WORDS)
+def choose_word(): # Function to choose a random word from the list of words
+    return random.choice(WORDS) # Return a random word from the WORDS list
 
-def display_word(secret_word, guessed_letters):
-    shown_word = ""
-    for letter in secret_word:
-        if letter in guessed_letters:
-            shown_word += letter + " "
-        else:
-            shown_word += "_ "
+def display_word(secret_word, guessed_letters): # Function to display the current state of the word with guessed letters and underscores for unguessed letters
+    shown_word = "" # Initialize an empty string to hold the displayed word
+    for letter in secret_word: # Loop through each letter in the secret word
+        if letter in guessed_letters: # If the letter has been guessed, add it to the displayed word
+            shown_word += letter + " " # Add the guessed letter followed by a space(for presentation purpose)
+        else: # If the letter has not been guessed, add an underscore to the displayed word
+            shown_word += "_ " # Add an underscore followed by a space(for presentation purpose)
 
-    return shown_word
+    return shown_word # Return the displayed word with guessed letters and underscores for unguessed letters
 
-def get_guess(guessed_letters):
+def get_guess(guessed_letters): # Function to get a valid guess from the player
     while True:
         print()
-        print("Guessed so far:", " ".join(guessed_letters))
-        guess = input("Enter ONE new letter: ").lower().strip()
+        print("Guessed so far:", " ".join(guessed_letters)) # Print the letters that have been guessed so far, joined by spaces
+        guess = input("Enter ONE new letter: ").lower().strip() # Get the player's guess, convert it to lowercase, and remove any leading or trailing whitespace
 
-        print("You typed:", guess)
+        print("You typed:", guess) # Print the player's guess for confirmation
 
         if len(guess) != 1:
             print("Please enter only one letter, for example: e")
-        elif not guess.isalpha():
+        elif not guess.isalpha(): # Check if the guess is a letter (not a number or symbol)
             print("Please enter a letter from A to Z.")
         elif guess in guessed_letters:
-            print("You already guessed that letter.")
+            print("You already guessed that letter.") # Check if the letter has already been guessed
         else:
             return guess
 
-def check_win(secret_word, guessed_letters):
+def check_win(secret_word, guessed_letters): # Function to check if the player has guessed all the letters in the secret word
     for letter in secret_word:
         if letter not in guessed_letters:
             return False
     return True
 
-def play_game():
+def play_game(): # Function to play the game of Hangman
     secret_word = choose_word()
     guessed_letters = []
-    wrong_guesses = 0
-    max_wrong = len(HANGMAN_PICS) - 1
+    wrong_guesses = 0 # Initialize the number of wrong guesses to 0
+    max_wrong = len(HANGMAN_PICS) - 1 # Set the maximum number of wrong guesses to the length of the HANGMAN_PICS list minus 1 (since the first element is the empty gallows)
 
     print("Welcome to Hangman!")
     print("Guess the word before the man is fully drawn.")
 
-    while True:
-        print(HANGMAN_PICS[wrong_guesses])
+    while True: # Loop until the player wins or loses
+        print(HANGMAN_PICS[wrong_guesses]) # Print the current state of the hangman drawing based on the number of wrong guesses
         print("Word:", display_word(secret_word, guessed_letters))
-        print("Guessed letters:", " ".join(guessed_letters))
+        #print("Guessed letters:", " ".join(guessed_letters))
         print("Wrong guesses:", wrong_guesses, "/", max_wrong)
         print()
 
@@ -85,10 +85,9 @@ def play_game():
         else:
             print("Wrong guess!")
             wrong_guesses += 1
+        print("-" * 30) # Print a separator line for better readability
 
-        print("-" * 20)
-
-def main():
+def Start(): # Function to start the game and ask the player if they want to play again
     while True:
         play_game()
 
@@ -97,6 +96,6 @@ def main():
         if again != "y":
             print("Thanks for playing!")
             break
-main()
+Start()
 
 # %%
